@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField, Button, Box } from '@mui/material';
 import axios from 'axios';
+import { useAuth } from '../hooks/useAuth';
 
 interface AddCommentFormProps {
   postId: number;
@@ -14,18 +15,19 @@ interface AddCommentFormInputs {
 
 const AddCommentForm: React.FC<AddCommentFormProps> = ({ postId, onCommentAdded }) => {
   const { register, handleSubmit, reset } = useForm<AddCommentFormInputs>();
-  
+  const { user } = useAuth();
 
   const onSubmit = async (data: AddCommentFormInputs) => {
     const newComment = {
       postId,
       body: data.body,
-      email: 'farid',
+      email: user,
       name: 'User',
     };
 
     // Simulate add comment API call
     await axios.post(`https://jsonplaceholder.typicode.com/comments`, newComment);
+    console.log('comment added successfully');
     reset();
     onCommentAdded();
   };
