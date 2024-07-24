@@ -1,8 +1,7 @@
 import React from 'react';
 import { useComments } from '../hooks/useComments';
 import { Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
-import AddCommentForm from './AddCommentFrom';
-import { useAuth } from '../hooks/useAuth';
+import AddCommentForm from './AddCommentForm';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Comment } from '../types';
 
@@ -13,7 +12,7 @@ interface CommentSidebarProps {
 
 const CommentSidebar: React.FC<CommentSidebarProps> = ({ postId, onClose }) => {
   const { data: comments, refetch } = useComments(postId);
-  const { user } = useAuth();
+  
 
   const handleDelete = async (commentId: number) => {
     // Simulate delete comment API call
@@ -27,7 +26,7 @@ const CommentSidebar: React.FC<CommentSidebarProps> = ({ postId, onClose }) => {
         {comments?.map((comment: Comment) => (
           <ListItem key={comment.id} alignItems="flex-start">
             <ListItemText primary={comment.name} secondary={comment.body} />
-            {comment.email === user && (
+            {comment.email === 'faridbayramov' && (
               <IconButton edge="end" onClick={() => handleDelete(comment.id)}>
                 <DeleteIcon />
               </IconButton>

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { TextField, Button } from '@mui/material';
-import { useAuth } from '../hooks/useAuth';
+
 import { useNavigate } from 'react-router-dom';
 
 interface LoginFormInputs {
@@ -11,7 +11,7 @@ interface LoginFormInputs {
 }
 
 const LoginForm: React.FC = () => {
-  const { loginUser } = useAuth();
+
   const navigate = useNavigate(); // Hook for navigation
 
   const schema = Yup.object().shape({
@@ -23,8 +23,8 @@ const LoginForm: React.FC = () => {
   });
 
   const onSubmit = async (data: LoginFormInputs) => {
-    await loginUser(data.email);
-    if (data.email) {
+    
+    if (data.email=="faridbayramov") {
   
       navigate('/'); // Redirect to main page after login
       console.log("it works");
