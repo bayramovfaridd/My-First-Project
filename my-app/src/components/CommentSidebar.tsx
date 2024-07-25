@@ -5,6 +5,7 @@ import AddCommentForm from './AddCommentForm';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Comment } from '../types';
 import { useAuth } from '../hooks/useAuth';
+import '../App.css'
 
 interface CommentSidebarProps {
   postId: number;
@@ -22,11 +23,11 @@ const CommentSidebar: React.FC<CommentSidebarProps> = ({ postId, onClose }) => {
   };
 
   return (
-    <Drawer anchor="right" open={true} onClose={onClose}>
-      <List>
+    <Drawer anchor="right" open={true} onClose={onClose} className='drawer'>
+      <List className='list'>
         {comments?.map((comment: Comment) => (
           <ListItem key={comment.id} alignItems="flex-start">
-            <ListItemText primary={comment.name} secondary={comment.body} />
+            <ListItemText  primary={"User: "+comment.name} secondary={comment.body} />
             {comment.email === user && (
               <IconButton edge="end" onClick={() => handleDelete(comment.id)}>
                 <DeleteIcon />
