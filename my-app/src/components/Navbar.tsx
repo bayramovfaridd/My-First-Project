@@ -1,16 +1,17 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@mui/material';
-import LoginForm from './LoginForm';
-import { useAuth } from '../hooks/useAuth';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 import '../App.css'
+
 const Navbar: React.FC = () => {
-const {user} =useAuth();
+  const userName = useSelector((state: RootState) => state.auth.userName);
 
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6">
-          <div className='navbartext'>{user}</div>
+         <div className='navbartext'>Welcome, {userName || 'Guest'}!</div> 
         </Typography>
       </Toolbar>
     </AppBar>
